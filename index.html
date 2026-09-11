@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="COVE: Continuous Action-Chunk Composition for Real-Time VLA Execution.">
+  <meta name="keywords" content="COVE, ICRA 2027, robotics, VLA, action chunks, real-time control, RTC, RoboCasa, LIBERO, LeRobot, PI05, GR00T-N1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>COVE: Continuous Action-Chunk Composition for Real-Time VLA Execution</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css?v=teaser-fix-3">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js?v=fix-carousel"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#top"><strong>COVE</strong></a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#method">Method</a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Real</a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="#hardware">Real Hardware</a>
+          <a class="navbar-item" href="#real-videos">Real Videos</a>
+          <a class="navbar-item" href="#reactive">Reactive Ablation</a>
+          <a class="navbar-item" href="#aux-real">Aux Real</a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">Simulation</a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="#simulation">Simulation Results</a>
+          <a class="navbar-item" href="#videos">Simulation Videos</a>
+        </div>
+      </div>
+      <a class="navbar-item" href="#bibtex">BibTeX</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">COVE: Continuous Action-Chunk Composition for Real-Time VLA Execution</h1>
+          <p class="subtitle is-4 publication-subtitle">
+            A controller-side compositor that turns asynchronous VLA action chunks into smooth, latency-aware command streams without policy retraining.
+          </p>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Anonymous Author(s)</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Submitted to ICRA 2027</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block"><a href="#" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-file-pdf"></i></span><span> Paper (Comming soon)</span></a></span>
+              <!-- <span class="link-block"><a href="#" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-file-alt"></i></span><span>Appendix</span></a></span> -->
+              <span class="link-block"><a href="#" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a></span>
+              <span class="link-block"><a href="#" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fab fa-github"></i></span><span>Code (Comming soon)</span></a></span>
+              <span class="link-block"><a href="#hardware" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-chart-line"></i></span><span>Results</span></a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section teaser" id="teaser">
+  <div class="container is-max-widescreen">
+    <div class="teaser-body">
+      <div class="teaser-video-frame">
+        <video class="teaser-video" controls autoplay muted loop playsinline preload="metadata" poster="./static/images/cove_teaser_poster.png?v=continuous-title" aria-label="COVE real robot teaser video">
+          <source src="./static/videos/vr_h3/cove_teaser_remastered.mp4?v=cove-labels" type="video/mp4">
+        </video>
+      </div>
+      <h2 class="subtitle has-text-centered">
+        COVE smooths asynchronous VLA chunks directly at the controller interface, enabling stable real-time execution on real robot manipulation.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Vision-Language-Action policies often execute manipulation through short-horizon action chunks, but real-time deployment creates a mismatch: each chunk is conditioned on a delayed observation while the robot has already evolved by the time that chunk reaches the controller. Consecutive chunks can therefore disagree, creating discontinuities in the executed command stream. COVE is a lightweight controller-side layer that converts asynchronous VLA outputs into continuous, reactive commands. It composes overlapping chunks using a covariant minimum-jerk rule that guarantees <span class="math-token">C<sup>2</sup></span> continuity at chunk boundaries, combines latency-aware lookahead with uncertainty-weighted mid-chunk observation fusion, requires no policy retraining, and runs in under 85&nbsp;µs. Across simulation/replay and real hardware, COVE reduces chunk-boundary velocity jumps while preserving or improving task success.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="method">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Method Overview</h2>
+    <figure class="paper-figure-block">
+      <img src="./static/images/fig1_cove_method_overview.png" class="paper-figure" alt="COVE turns delayed VLA chunks into smooth controller-ready commands">
+      <figcaption>
+        <strong>Figure 1.</strong> COVE turns delayed VLA chunks into a smooth, controller-ready command. Naive replace-on-arrival exposes chunk disagreement as position, velocity, and acceleration discontinuities; COVE composes overlapping chunks over a short blend window into a continuous command stream.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section" id="hardware">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Real Hardware: Bartender Handover</h2>
+    <figure class="paper-figure-block">
+      <img src="./static/images/fig2_real_bartender_handover.png" class="paper-figure" alt="Real bartender handover deployment">
+      <figcaption>
+        <strong>Figure 2.</strong> A fine-tuned GR00T-N1 policy emits action chunks for a spoken-drink-into-moving-hand task while COVE runs at the EtherCAT master at 1&nbsp;kHz. The same policy and chunks are used across execution conditions; only the actuator-interface composition changes.
+      </figcaption>
+    </figure>
+
+    <p class="has-text-centered metric-note">
+      The hardware policy is a fine-tuned GR00T-N1 policy evaluated on 200 held-out real-robot trials per execution condition. Lower p95 velocity jump and peak torque are better; success is reported with 95% binomial confidence-interval half-width.
+    </p>
+    <div class="table-container results-table-container">
+      <table class="table is-striped is-hoverable is-fullwidth results-table paper-results-table">
+        <thead><tr><th>Execution layer</th><th>p95 vel. jump [rad/s] ↓</th><th>Peak torque [Nm] ↓</th><th>Success [%] ↑</th></tr></thead>
+        <tbody>
+          <tr><td>Replace-on-arrival</td><td>4.82</td><td>48.5</td><td>60.0 ± 6.8</td></tr>
+          <tr><td>RTC only</td><td>1.12</td><td>18.6</td><td>68.0 ± 6.5</td></tr>
+          <tr class="is-selected-row"><td>COVE</td><td>0.65</td><td>14.1</td><td>70.0 ± 6.4</td></tr>
+          <tr class="is-selected-row"><td>COVE⊕RTC</td><td><strong>0.58</strong></td><td><strong>13.4</strong></td><td><strong>72.0 ± 6.2</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="real-videos">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Real Qualitative Videos</h2>
+    <p class="has-text-centered metric-note">
+      Qualitative real-robot trials. Part 1 compares COVE with RTC and temporal ensembling during the placing phase; Part 2 shows pick-and-place rollouts using COVE.
+    </p>
+
+    <div class="task-video-block">
+      <div class="task-command">
+        <p class="heading">Part 1: Placing</p>
+        <p>Side-by-side comparison of real-robot placing behavior using COVE, RTC, and temporal ensembling.</p>
+      </div>
+      <div class="real-video-grid">
+        <div class="video-card"><h4>COVE</h4><video controls muted playsinline preload="metadata"><source src="./static/videos/vr_h3/PART_1_placing_COVE_web.mp4" type="video/mp4"></video></div>
+        <div class="video-card"><h4>RTC</h4><video controls muted playsinline preload="metadata"><source src="./static/videos/vr_h3/PART_1_placing_RTC.mp4" type="video/mp4"></video></div>
+        <div class="video-card"><h4>Temporal Ensembling</h4><video controls muted playsinline preload="metadata"><source src="./static/videos/vr_h3/PART_1_placing_TE.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+
+    <div class="task-video-block">
+      <div class="task-command">
+        <p class="heading">Part 2: Pick and Place</p>
+        <p>Real-robot pick-and-place rollouts using COVE.</p>
+      </div>
+      <div class="real-video-grid">
+        <div class="video-card"><h4>COVE Pick</h4><video controls muted playsinline preload="metadata"><source src="./static/videos/vr_h3/PART_2_Pick_COVE.mp4" type="video/mp4"></video></div>
+        <!-- <div class="video-card"><h4>Baseline Place</h4><video controls muted playsinline preload="metadata"><source src="./static/videos/vr_h3/PART_2_placing_baseline.mp4" type="video/mp4"></video></div> -->
+        <!-- <div class="video-card"><h4>Place 01</h4><video controls muted playsinline preload="metadata"><source src="./static/videos/vr_h3/PART_2_placing_01.mp4" type="video/mp4"></video></div> -->
+        <div class="video-card"><h4>COVE Place</h4><video controls muted playsinline preload="metadata"><source src="./static/videos/vr_h3/PART_2_placing_COVE.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="reactive">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Reactive Input Ablation</h2>
+    <p class="has-text-centered metric-note">
+      Appendix real-robot ablation: 50 trials per condition on the bartender handover platform. The same fine-tuned policy and platform are used while toggling COVE's reactive input.
+    </p>
+    <div class="table-container results-table-container reactive-table-container">
+      <table class="table is-striped is-hoverable is-fullwidth results-table paper-results-table">
+        <thead><tr><th>Execution layer</th><th>Final hand-target error [cm] ↓</th><th>Vel. jump [rad/s] ↓</th></tr></thead>
+        <tbody>
+          <tr><td>Replace-on-arrival</td><td>∼12.0</td><td>4.82</td></tr>
+          <tr><td>COVE, no reactive input</td><td>∼5.5</td><td>0.65</td></tr>
+          <tr class="is-selected-row"><td>COVE, full reactive</td><td><strong>∼1.5</strong></td><td><strong>0.50</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="simulation">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Simulation / Replay Results</h2>
+    <p class="has-text-centered metric-note">
+      RoboCasa reports cached-chunk simulation/replay, while LIBERO reports the online PI05 rollout sweep. Lower command discontinuity is smoother; success is reported in percent.
+    </p>
+
+    <h3 class="title is-4">GR00T-N1.6 + GR1 on RoboCasa, 24 tasks</h3>
+    <div class="table-container results-table-container">
+      <table class="table is-striped is-hoverable is-fullwidth results-table paper-results-table">
+        <thead><tr><th>Execution layer</th><th>J<sub>v</sub> / Vel. jump [rad/s] ↓</th><th>Jerk ↓</th><th>Success [%] ↑</th></tr></thead>
+        <tbody>
+          <tr><td>Replace-on-arrival (R7)</td><td>18.36 ± 1.38</td><td>1.00 ± 0.15</td><td>42.9 ± 6.3</td></tr>
+          <tr><td>Temporal ensembling (R7)</td><td>8.79 ± 0.74</td><td>0.76 ± 0.14</td><td>40.8 ± 6.3</td></tr>
+          <tr><td>RTC only (R7) </td><td>6.80 ± 0.63</td><td>0.84 ± 0.15</td><td>44.6 ± 6.4</td></tr>
+          <tr class="is-selected-row"><td>COVE</td><td>3.92 ± 0.31</td><td>1.00 ± 0.20</td><td>40.1 ± 6.2</td></tr>
+          <tr class="is-selected-row"><td>COVE⊕RTC</td><td><strong>2.35 ± 0.26</strong></td><td>0.86 ± 0.17</td><td>43.8 ± 6.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="title is-4">PI05 + LIBERO online rollout, 10-task suite</h3>
+    <p class="metric-note">
+      Evaluation uses LIBERO's native 20&nbsp;Hz relative-R7 control interface, with 600 paired rollouts per method. We report success and the mean p95 action jump at chunk handoffs over successful rollouts (lower is better); brackets indicate 95% bootstrap confidence intervals.
+    </p>
+    <div class="table-container results-table-container">
+      <table class="table is-striped is-hoverable is-fullwidth results-table paper-results-table">
+        <thead><tr><th>Execution layer</th><th>p95 handoff action jump ↓</th><th>Success [%] ↑</th></tr></thead>
+        <tbody>
+          <tr><td>Replace-on-arrival</td><td>0.258 [0.236, 0.281]</td><td>93.7 [91.7, 95.5]</td></tr>
+          <tr><td>Temporal ensembling</td><td>0.189 [0.182, 0.196]</td><td>81.7 [78.5, 84.7]</td></tr>
+          <tr><td>RTC only</td><td>0.140 [0.137, 0.143]</td><td>95.2 [93.3, 96.8]</td></tr>
+          <tr class="is-selected-row"><td>COVE</td><td>0.194 [0.181, 0.210]</td><td><strong>95.3 [93.5, 96.8]</strong></td></tr>
+          <tr class="is-selected-row"><td>COVE⊕RTC</td><td><strong>0.137 [0.134, 0.140]</strong></td><td>92.7 [90.5, 94.7]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <p class="metric-note">
+      Timing: <em>T</em><sub>a</sub>=20&nbsp;ms, <em>T</em><sub>s</sub>=30&nbsp;ms, and adaptive <em>T</em><sub>b</sub>∈[50,100]&nbsp;ms. Initial states and latency sequences are identical across methods.
+    </p> -->
+  </div>
+</section>
+
+<section class="section" id="videos">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Simulation Videos</h2>
+    <p class="has-text-centered metric-note">
+      PI05 rollouts on all 10 LIBERO tasks at the native 20 Hz control rate.
+      Each task shows the five execution layers; labels report the outcome of the displayed rollout, not the aggregate success rate.
+    </p>
+    <div class="task-video-block" id="libero-task-3">
+      <div class="task-command">
+        <p class="heading">LIBERO-10 Task 3 Command</p>
+        <p>Put the black bowl in the bottom drawer of the cabinet and close it.</p>
+      </div>
+      <div class="gallery-frame task-gallery-frame">
+        <div class="carousel gallery-carousel task-carousel">
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>Replace - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 3: Replace, success"><source src="./static/videos/libero/v2/libero_10_3__replace-on-arrival__success.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>Temporal - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 3: Temporal, success"><source src="./static/videos/libero/v2/libero_10_3__temporal_ensembling__success.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>RTC - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 3: RTC, success"><source src="./static/videos/libero/v2/libero_10_3__rtc_only__success.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>COVE - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 3: COVE, success"><source src="./static/videos/libero/v2/libero_10_3__cove_ours__success.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>COVE+RTC - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 3: COVE+RTC, success"><source src="./static/videos/libero/v2/libero_10_3__cove+rtc__success.mp4" type="video/mp4"></video></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="task-video-block" id="libero-task-5">
+      <div class="task-command">
+        <p class="heading">LIBERO-10 Task 5 Command</p>
+        <p>Pick up the book and place it in the back compartment of the caddy.</p>
+      </div>
+      <div class="gallery-frame task-gallery-frame">
+        <div class="carousel gallery-carousel task-carousel">
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>Replace - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 5: Replace, success"><source src="./static/videos/libero/v2/libero_10_5__replace-on-arrival__success.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>Temporal - Fail</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 5: Temporal, success"><source src="./static/videos/libero/v2/libero_10_5__temporal_ensembling__fail.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>RTC - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 5: RTC, success"><source src="./static/videos/libero/v2/libero_10_5__rtc_only__success.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>COVE - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 5: COVE, success"><source src="./static/videos/libero/v2/libero_10_5__cove_ours__success.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>COVE+RTC - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 5: COVE+RTC, success"><source src="./static/videos/libero/v2/libero_10_5__cove+rtc__success.mp4" type="video/mp4"></video></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-video-block" id="libero-task-9">
+      <div class="task-command">
+        <p class="heading">LIBERO-10 Task 9 Command</p>
+        <p>Put the yellow and white mug in the microwave and close it.</p>
+      </div>
+      <div class="gallery-frame task-gallery-frame">
+        <div class="carousel gallery-carousel task-carousel">
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>Replace - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 9: Replace, success"><source src="./static/videos/libero/v2/libero_10_9__replace-on-arrival__success.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>Temporal - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 9: Temporal, success"><source src="./static/videos/libero/v2/libero_10_9__temporal_ensembling__success.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>RTC - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 9: RTC, success"><source src="./static/videos/libero/v2/libero_10_9__rtc_only__success.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>COVE - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 9: COVE, success"><source src="./static/videos/libero/v2/libero_10_9__cove_ours__success.mp4" type="video/mp4"></video></div></div>
+          <div class="gallery-slide"><div class="video-card gallery-card"><h4>COVE+RTC - Success</h4><video controls muted playsinline preload="metadata" aria-label="LIBERO task 9: COVE+RTC, success"><source src="./static/videos/libero/v2/libero_10_9__cove+rtc__success.mp4" type="video/mp4"></video></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="aux-real">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3 has-text-centered">Auxiliary Real Results</h2>
+    <p class="has-text-centered metric-note">
+      Extra real-robot videos for qualitative inspection. These are auxiliary media and are kept separate from the main quantitative hardware table.
+    </p>
+    <div class="real-video-grid aux-real-grid">
+      <div class="video-card"><h4>Real-robot picking with COVE</h4><video controls muted playsinline preload="metadata"><source src="./static/videos/vr_h3/aux_real_cove_1.mp4" type="video/mp4"></video></div>
+      <div class="video-card"><h4>Real-robot placing with COVE</h4><video controls muted playsinline preload="metadata"><source src="./static/videos/vr_h3/aux_real_cove_2.mp4" type="video/mp4"></video></div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 has-text-centered">Acknowledgements</h2>
+    <p>This project page is prepared for review. Code, videos, and metadata will be linked after release.</p>
+  </div>
+</section>
+
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{anonymous2027cove,
+  title     = {COVE: Continuous Action-Chunk Composition for Real-Time VLA Execution},
+  author    = {Anonymous Author(s)},
+  booktitle = {Submitted to the IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2027}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="#"><i class="fas fa-file-pdf"></i></a>
+      <a class="icon-link" href="#"><i class="fab fa-github"></i></a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>This page borrows the structure of the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies website template</a>. Please keep template attribution in derived pages.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

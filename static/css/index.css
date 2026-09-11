@@ -1,0 +1,540 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-video-column {
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+
+/* COVE project-page placeholder styles. */
+.publication-subtitle {
+  margin-top: 0.75rem;
+  color: #4a4a4a;
+}
+
+.placeholder-figure {
+  width: 100%;
+  border: 1px solid #d6dce5;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.metric-note {
+  max-width: 850px;
+  margin: 0 auto 1.5rem auto;
+  color: #4a4a4a;
+}
+
+.results-table-container {
+  margin-bottom: 2rem;
+}
+
+.results-table th,
+.results-table td {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.results-table td:first-child,
+.results-table th:first-child {
+  white-space: normal;
+  min-width: 220px;
+}
+
+.results-table .is-selected-row {
+  background: #f0f7ff;
+}
+
+.ablation-results {
+  margin-top: 0.5rem;
+}
+
+/* Keep this available if the hidden Takeaway column is restored. */
+/* .ablation-table .takeaway-column {
+  white-space: normal;
+  min-width: 220px;
+} */
+
+.ablation-table .is-balanced-row {
+  background: #f1fbf6;
+}
+
+.result-cards {
+  margin-top: 1rem;
+}
+
+.result-card {
+  height: 100%;
+  border: 1px solid #d6dce5;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fff;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.task-video-block {
+  margin-top: 2rem;
+}
+
+.task-command {
+  max-width: 1080px;
+  margin: 0 auto 1rem auto;
+  border-left: 4px solid #2f6fed;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  background: #f7f9fc;
+}
+
+.task-command .heading {
+  margin-bottom: 0.25rem;
+  color: #2f6fed;
+  letter-spacing: 0;
+}
+
+.task-command p:last-child {
+  margin-bottom: 0;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.gallery-frame {
+  position: relative;
+  width: min(1080px, 100%);
+  margin: 1rem auto 2rem auto;
+  padding: 0.42rem 2.5rem 1.35rem 2.5rem;
+  border-top: 1px solid #1f2937;
+  border-bottom: 1px solid #1f2937;
+  background: #f5f6f8;
+  overflow: hidden;
+}
+
+.gallery-carousel {
+  width: 100%;
+}
+
+/* Horizontal fallback before bulma-carousel finishes initializing. */
+.gallery-carousel:not(.slider) {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.gallery-carousel:not(.slider) > .gallery-slide {
+  flex: 0 0 33.333%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.gallery-frame .slider-container {
+  align-items: stretch;
+}
+
+.gallery-slide {
+  padding: 0 0.22rem;
+}
+
+.gallery-card {
+  height: 100%;
+  border: 1px solid #d6dce5;
+  border-radius: 7px;
+  padding: 0.35rem;
+  background: #fff;
+}
+
+.gallery-card h4 {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.gallery-card video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #111;
+}
+
+.gallery-frame .slider-navigation-next,
+.gallery-frame .slider-navigation-previous {
+  z-index: 5;
+  opacity: 0.96;
+}
+
+.gallery-frame .slider-navigation-previous {
+  left: 0.45rem;
+}
+
+.gallery-frame .slider-navigation-next {
+  right: 0.45rem;
+}
+
+.gallery-frame .slider-pagination {
+  bottom: 0.15rem;
+}
+
+.gallery-frame .slider-pagination .slider-page {
+  background: #1f2937;
+  box-shadow: none;
+}
+
+.placeholder-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  background: #eef2f7;
+  overflow: hidden;
+}
+
+.placeholder-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.placeholder-gallery-card p {
+  margin-bottom: 0;
+  color: #4a4a4a;
+}
+
+.real-result-carousel-title {
+  margin-top: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .gallery-frame {
+    width: min(760px, 100%);
+    padding-left: 2.2rem;
+    padding-right: 2.2rem;
+  }
+
+  .gallery-carousel:not(.slider) > .gallery-slide {
+    flex-basis: 100%;
+  }
+}
+
+.video-card {
+  border: 1px solid #d6dce5;
+  border-radius: 8px;
+  padding: 0.75rem;
+  background: #fff;
+}
+
+.video-card h4 {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.video-card video {
+  width: 100%;
+  border-radius: 6px;
+  background: #111;
+}
+
+
+.placeholder-card {
+  border: 1px dashed #b8c2d4;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fbfcff;
+  text-align: center;
+}
+
+.placeholder-card p {
+  margin-top: 0.75rem;
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.method-placeholder-copy {
+  margin-top: 1rem;
+}
+
+/* COVE paper page styles. */
+.paper-figure-block {
+  margin: 1.25rem auto 2rem auto;
+  max-width: 1180px;
+}
+
+.paper-figure {
+  width: 100%;
+  display: block;
+  border: 1px solid #d6dce5;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.hero-figure {
+  max-height: 560px;
+  object-fit: contain;
+}
+
+.paper-figure-block figcaption {
+  max-width: 980px;
+  margin: 0.75rem auto 0 auto;
+  color: #4a4a4a;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.paper-results-table th,
+.paper-results-table td {
+  text-align: center;
+}
+
+.paper-results-table th:first-child,
+.paper-results-table td:first-child {
+  text-align: left;
+}
+
+.reactive-table-container {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.math-token {
+  white-space: nowrap;
+}
+
+
+.real-video-note {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Reserve stable space for the teaser video so it cannot overlap Abstract. */
+.teaser {
+  display: block;
+  overflow: hidden;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+  margin-bottom: 0;
+}
+
+.teaser-body {
+  display: block;
+}
+
+.teaser + .section {
+  clear: both;
+  margin-top: 0;
+  padding-top: 4rem;
+}
+
+.teaser-video-frame {
+  display: block;
+  position: relative;
+  width: min(100%, 1080px);
+  aspect-ratio: 16 / 9;
+  margin: 0 auto 1.25rem auto;
+  border: 1px solid #d6dce5;
+  border-radius: 8px;
+  background: #111;
+  overflow: hidden;
+}
+
+.teaser-video {
+  display: block;
+  position: static;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.real-video-grid {
+  width: min(1080px, 100%);
+  margin: 1rem auto 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.real-video-grid .video-card {
+  height: auto;
+}
+
+.real-video-grid video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #111;
+}
+
+.aux-real-grid {
+  max-width: 820px;
+}
+
+/* Reduce vertical space between sections to ~70% */
+.section {
+  padding: 1.5rem 1.5rem !important;
+}
